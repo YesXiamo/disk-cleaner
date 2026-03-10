@@ -28,3 +28,6 @@ logs/
 
 # Electron
 out/
+
+# 个人分享文档
+分享.md
