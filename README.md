@@ -2,7 +2,7 @@
 
 一款基于 Electron 开发的 Mac 磁盘清理软件，具有美观的 UI 界面和实用的文件管理功能。
 
-![Disk Cleaner 截图](screenshots/20260310191857.jpg)
+![Disk Cleaner 截图](screenshots/app-screenshot.jpg)
 
 ## 功能特性
 
