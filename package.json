@@ -1,0 +1,55 @@
+{
+  "name": "disk-cleaner",
+  "version": "1.0.0",
+  "description": "Mac磁盘清理软件 - 带热力图可视化",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac",
+    "build:mac:dir": "electron-builder --mac --dir",
+    "dist": "npm run build:mac"
+  },
+  "keywords": [
+    "disk",
+    "cleaner",
+    "mac",
+    "storage"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "com.example.disk-cleaner",
+    "productName": "Disk Cleaner",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ],
+      "icon": "build/icon.icns"
+    },
+    "dmg": {
+      "title": "Disk Cleaner",
+      "backgroundColor": "#1a1a2e"
+    }
+  }
+}
