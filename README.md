@@ -63,9 +63,9 @@ npm start
 
 | 版本 | 文件 | 大小 | 系统要求 |
 |------|------|------|----------|
-| v1.0.0 | [Disk Cleaner-1.0.0-arm64.dmg](#) | 99MB | macOS 10.15+ (Apple Silicon) |
+| v1.0.0 | [Disk Cleaner-1.0.0-arm64.dmg](https://github.com/YesXiamo/disk-cleaner/releases/download/v1.0.0/Disk.Cleaner-1.0.0-arm64.dmg) | 99MB | macOS 10.15+ (Apple Silicon) |
 
-> 🔗 **下载链接**：请联系项目维护者获取下载链接，或从内部共享盘获取
+> 🔗 **下载链接**：直接从 GitHub Releases 下载
 
 ### 安装步骤
 
