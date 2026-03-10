@@ -56,9 +56,24 @@ npm start
 ```
 
 ### 打包构建
+
+> ⚠️ **注意**：打包后的应用文件较大（约 200MB+），这是因为 Electron 包含了 Chromium 内核。项目未提供预编译版本，请自行打包。
+
 ```bash
+# 打包 Mac 版本（arm64 架构）
 npm run build
+
+# 或只生成目录，不打包 dmg
+npm run build:mac:dir
+
+# 打包输出位置
+dist/mac-arm64/Disk Cleaner.app
 ```
+
+**打包说明**：
+- 仅支持 Mac 系统（arm64 架构）
+- 需要安装 Node.js 和 npm
+- 首次打包可能需要下载 Electron 依赖，请耐心等待
 
 ## 使用说明
 
