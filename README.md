@@ -2,6 +2,8 @@
 
 一款基于 Electron 开发的 Mac 磁盘清理软件，具有美观的 UI 界面和实用的文件管理功能。
 
+[![GitHub](https://img.shields.io/badge/GitHub-YesXiamo%2Fdisk--cleaner-blue)](https://github.com/YesXiamo/disk-cleaner)
+
 ![Disk Cleaner 截图](screenshots/app-screenshot.jpg)
 
 ## 功能特性
@@ -177,3 +179,5 @@ MIT License
 ## 作者
 
 基于 Electron 开发的 Mac 磁盘清理工具
+
+- **GitHub 仓库**: [https://github.com/YesXiamo/disk-cleaner](https://github.com/YesXiamo/disk-cleaner)
