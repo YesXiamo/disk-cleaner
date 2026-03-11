@@ -4,6 +4,7 @@ const fs = require('fs');
 const { exec } = require('child_process');
 const util = require('util');
 const execPromise = util.promisify(exec);
+const fg = require('fast-glob');
 
 let mainWindow;
 
@@ -44,56 +45,90 @@ app.on('activate', () => {
   }
 });
 
-// 扫描目录获取文件信息（包含隐藏文件夹）
+// 扫描目录获取文件信息（使用 fast-glob 优化性能）
 async function scanDirectory(dirPath, depth = 0, maxDepth = 4) {
   const results = [];
   
   try {
-    const entries = await fs.promises.readdir(dirPath, { withFileTypes: true });
+    // 使用 fast-glob 快速获取所有文件和目录
+    const entries = await fg('*', {
+      cwd: dirPath,
+      onlyFiles: false,
+      markDirectories: true,
+      dot: true, // 包含隐藏文件
+      followSymbolicLinks: false,
+      suppressErrors: true, // 忽略权限错误
+      concurrency: 100 // 并发数
+    });
     
-    for (const entry of entries) {
-      const fullPath = path.join(dirPath, entry.name);
+    // 并行处理所有条目
+    const entryPromises = entries.map(async (entryName) => {
+      // 去除目录标记的斜杠
+      const cleanName = entryName.endsWith('/') ? entryName.slice(0, -1) : entryName;
+      const fullPath = path.join(dirPath, cleanName);
       
       // 只跳过特定的系统目录，保留隐藏文件夹
-      if (entry.name === 'node_modules' || 
-          entry.name === '.Trash' ||
-          entry.name === '.Spotlight-V100' ||
-          entry.name === '.fseventsd' ||
-          entry.name === '.DocumentRevisions-V100') {
-        continue;
+      if (cleanName === 'node_modules' || 
+          cleanName === '.Trash' ||
+          cleanName === '.Spotlight-V100' ||
+          cleanName === '.fseventsd' ||
+          cleanName === '.DocumentRevisions-V100') {
+        return null;
       }
       
       try {
         const stats = await fs.promises.stat(fullPath);
+        const isDirectory = stats.isDirectory();
         
-        if (entry.isDirectory() && depth < maxDepth) {
+        if (isDirectory && depth < maxDepth) {
           const children = await scanDirectory(fullPath, depth + 1, maxDepth);
           const totalSize = children.reduce((sum, child) => sum + child.size, stats.size);
           
-          results.push({
-            name: entry.name,
+          return {
+            name: cleanName,
             path: fullPath,
             size: totalSize,
             type: 'directory',
             children: children,
             mtime: stats.mtime,
-            isHidden: entry.name.startsWith('.')
-          });
-        } else if (entry.isFile()) {
-          results.push({
-            name: entry.name,
+            isHidden: cleanName.startsWith('.')
+          };
+        } else if (isDirectory) {
+          // 达到最大深度，只统计目录本身大小
+          return {
+            name: cleanName,
+            path: fullPath,
+            size: stats.size,
+            type: 'directory',
+            children: [],
+            mtime: stats.mtime,
+            isHidden: cleanName.startsWith('.')
+          };
+        } else {
+          return {
+            name: cleanName,
             path: fullPath,
             size: stats.size,
             type: 'file',
             children: [],
             mtime: stats.mtime,
-            isHidden: entry.name.startsWith('.')
-          });
+            isHidden: cleanName.startsWith('.')
+          };
         }
       } catch (err) {
         // 权限错误，跳过
+        return null;
       }
-    }
+    });
+    
+    // 等待所有并行任务完成
+    const resolvedEntries = await Promise.all(entryPromises);
+    
+    // 过滤掉 null 值并添加到结果
+    resolvedEntries.forEach(entry => {
+      if (entry) results.push(entry);
+    });
+    
   } catch (err) {
     // 目录无法读取
   }

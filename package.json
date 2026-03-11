@@ -37,7 +37,9 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["arm64"]
+          "arch": [
+            "arm64"
+          ]
         }
       ],
       "icon": "build/icon.icns"
@@ -46,5 +48,8 @@
       "title": "Disk Cleaner",
       "backgroundColor": "#1a1a2e"
     }
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.3"
   }
 }
