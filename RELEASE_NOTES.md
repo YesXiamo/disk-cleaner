@@ -1,3 +1,23 @@
+# Disk Cleaner v1.0.1 发布说明
+
+## 🚀 性能优化版本
+
+### ⚡ 优化内容
+
+- **磁盘扫描性能提升** - 使用 `fast-glob` 替代原生 `fs.readdir`
+  - 并行处理文件 stat 操作，大幅提升扫描速度
+  - 添加并发控制 (concurrency: 100)
+  - 优化错误处理机制
+
+### 📦 安装包
+
+- **文件名**: `Disk Cleaner-1.0.1-arm64.dmg`
+- **大小**: ~99MB
+- **架构**: arm64 (Apple Silicon)
+- **系统要求**: macOS 10.15+
+
+---
+
 # Disk Cleaner v1.0.0 发布说明
 
 ## 🎉 首次发布

@@ -1,6 +1,6 @@
 {
   "name": "disk-cleaner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mac磁盘清理软件 - 带热力图可视化",
   "main": "src/main.js",
   "scripts": {
