@@ -63,15 +63,18 @@ npm start
 
 ### 直接下载（推荐）
 
+前往 GitHub Releases 页面下载最新版本：
+
+🔗 **https://github.com/YesXiamo/disk-cleaner/releases**
+
 | 版本 | 文件 | 大小 | 系统要求 |
 |------|------|------|----------|
-| v1.0.0 | [Disk Cleaner-1.0.0-arm64.dmg](https://github.com/YesXiamo/disk-cleaner/releases/download/v1.0.0/Disk.Cleaner-1.0.0-arm64.dmg) | 99MB | macOS 10.15+ (Apple Silicon) |
-
-> 🔗 **下载链接**：直接从 GitHub Releases 下载
+| v1.0.1 | Disk Cleaner-1.0.1-arm64.dmg | 100MB | macOS 10.15+ (Apple Silicon) |
+| v1.0.0 | Disk Cleaner-1.0.0-arm64.dmg | 99MB | macOS 10.15+ (Apple Silicon) |
 
 ### 安装步骤
 
-1. 下载 `Disk Cleaner-1.0.0-arm64.dmg`
+1. 前往 [GitHub Releases](https://github.com/YesXiamo/disk-cleaner/releases) 下载最新版本
 2. 双击打开 DMG 文件
 3. 将 `Disk Cleaner.app` 拖到 Applications 文件夹
 4. 从启动台打开应用
